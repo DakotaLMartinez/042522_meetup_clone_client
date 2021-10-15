@@ -8,7 +8,7 @@ function App() {
   const [authChecked, setAuthChecked] = useState(false)
 
   useEffect(() => {
-    fetch('/api/me', {
+    fetch('/me', {
       credentials: 'include'
     })
       .then(res => {

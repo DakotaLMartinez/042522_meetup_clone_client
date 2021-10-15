@@ -11,7 +11,7 @@ function Navbar({setCurrentUser, currentUser, handleLogout}) {
       profile_picture_url: result.info.secure_url,
       profile_picture_thumbnail_url: result.info.eager[0].secure_url
     }
-    fetch('/api/me', {
+    fetch('/me', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'

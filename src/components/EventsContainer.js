@@ -8,12 +8,12 @@ function EventsContainer() {
   const [groups, setGroups] = useState([])
   
   useEffect(() => {
-    fetch(`/api/events`, {
+    fetch(`/events`, {
       credentials: 'include'
     })
       .then(res => res.json())
       .then(events => setEvents(events))
-    fetch(`/api/groups`, {
+    fetch(`/groups`, {
       credentials: 'include'
     })
       .then(res => res.json())
@@ -22,7 +22,7 @@ function EventsContainer() {
 
   const removeRsvpToEvent = (eventId) => {
     const event = events.find(event => event.id === eventId)
-    return fetch(`/api/user_events/${event.user_event.id}`, {
+    return fetch(`/user_events/${event.user_event.id}`, {
       method: "DELETE",
       credentials: 'include'
     })
@@ -47,7 +47,7 @@ function EventsContainer() {
   }
 
   const cancelEvent = (eventId) => {
-    return fetch(`/api/events/${eventId}`, {
+    return fetch(`/events/${eventId}`, {
       method: "DELETE",
       credentials: 'include'
     })
@@ -59,7 +59,7 @@ function EventsContainer() {
       })
   }
   const rsvpToEvent = (eventId) => {
-    return fetch('/api/user_events', {
+    return fetch('/user_events', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -95,7 +95,7 @@ function EventsContainer() {
   }
 
   const createEvent = (formData) => {
-    return fetch("/api/events", {
+    return fetch("/events", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
