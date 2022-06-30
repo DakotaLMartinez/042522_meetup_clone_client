@@ -22,20 +22,20 @@ function EventsContainer() {
 
   const removeRsvpToEvent = (eventId) => {
     const event = events.find(event => event.id === eventId)
-    return fetch(`/user_events/${event.user_event.id}`, {
+    return fetch(`/rsvps/${event.rsvp.id}`, {
       method: "DELETE",
       credentials: 'include'
     })
       .then(res => {
         if (res.ok) {
           // if the event is the one we just removed an rsvp 
-          // for, set its user_event property in state to 
+          // for, set its rsvp property in state to 
           // undefined; If not, leave the event as it is
           const updatedEvents = events.map((event) => {
             if (event.id === eventId) {
               return {
                 ...event,
-                user_event: undefined
+                rsvp: undefined
               }
             } else {
               return event
@@ -59,7 +59,7 @@ function EventsContainer() {
       })
   }
   const rsvpToEvent = (eventId) => {
-    return fetch('/user_events', {
+    return fetch('/rsvps', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -76,15 +76,15 @@ function EventsContainer() {
           return res.json().then(errors => Promise.reject(errors))
         }
       })
-      .then(userEvent => {
+      .then(rsvp => {
         // if the event is the one we just rsvp'd to
-        // add a user_event property in state and set
-        // it to the userEvent; if not, leave it as is
+        // add a rsvp property in state and set
+        // it to the rsvp; if not, leave it as is
         const updatedEvents = events.map((event) => {
           if (event.id === eventId) {
             return {
               ...event,
-              user_event: userEvent
+              rsvp: rsvp
             }
           } else {
             return event

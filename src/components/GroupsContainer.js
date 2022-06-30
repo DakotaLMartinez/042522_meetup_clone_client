@@ -16,8 +16,8 @@ function GroupsContainer() {
 
 
   const leaveGroup = (groupId) => {
-    let userGroupId = groups.find(group => group.id === groupId).user_group.id
-    return fetch(`/user_groups/${userGroupId}`, {
+    let membership = groups.find(group => group.id === groupId).membership.id
+    return fetch(`/memberships/${membership}`, {
       method: 'DELETE',
       credentials: 'include'
     })
@@ -27,7 +27,7 @@ function GroupsContainer() {
             if (group.id === groupId) {
               return {
                 ...group,
-                user_group: undefined
+                membership: undefined
               }
             } else {
               return group
@@ -39,7 +39,7 @@ function GroupsContainer() {
   }
 
   const joinGroup = (groupId) => {
-    return fetch('/user_groups', {
+    return fetch('/memberships', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -56,12 +56,12 @@ function GroupsContainer() {
           return res.json().then(errors => Promise.reject(errors))
         }
       })
-      .then(userGroup => {
+      .then(membership => {
         const updatedGroups = groups.map(group => {
           if (group.id === groupId) {
             return {
               ...group,
-              user_group: userGroup
+              membership: membership
             }
           } else {
             return group

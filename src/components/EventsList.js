@@ -16,7 +16,7 @@ function EventsList({ events, groups, removeRsvpToEvent, cancelEvent, rsvpToEven
 
 
   const rsvpOrCancelButton = (event) => {
-    if (event.user_event) {
+    if (event.rsvp) {
       return <button className="px-4 py-1 bg-red-400 text-white" onClick={() => removeRsvpToEvent(event.id)}>Cancel RSVP</button>
     } else {
       return <button className="px-4 py-1 bg-green-500 text-white" onClick={() => rsvpToEvent(event.id)}>RSVP for event</button>
@@ -24,7 +24,7 @@ function EventsList({ events, groups, removeRsvpToEvent, cancelEvent, rsvpToEven
   }
 
   const cancelEventButton = (event) => {
-    if (event.user_is_creator) {
+    if (event.user_can_modify) {
       return <button className="px-4 py-1 bg-red-400 text-white" onClick={() => cancelEvent(event.id)}>Cancel Event</button>
     }
   }

@@ -17,7 +17,7 @@ function GroupDetail({ groupId, leaveGroup, joinGroup }) {
   }, [fetchGroupCallback])
 
   const leaveOrJoinButton = (group) => {
-    if (group.user_group) {
+    if (group.membership) {
       return (
         <button
           className="px-4 py-1 bg-red-400 text-white" 

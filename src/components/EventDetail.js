@@ -43,7 +43,7 @@ function EventDetail({ eventId, removeRsvpToEvent, rsvpToEvent, cancelEvent }) {
   }
 
   const rsvpButton = (event) => {
-    if (event.user_event) {
+    if (event.rsvp) {
       return (
         <button
           className="px-4 py-1 bg-red-400 text-white"
@@ -74,13 +74,13 @@ function EventDetail({ eventId, removeRsvpToEvent, rsvpToEvent, cancelEvent }) {
       <h1 className="font-bold text-3xl">{event.title}</h1>
       {event.poster_image_url && (<img src={event.poster_image_url} alt={event.title} className="my-4" />)}
       {cancelEventButton(event)}
-      <small>Created by {event.creator} for <Link to={`/groups/${event.group.id}`}>{event.group.name}</Link></small>
+      <small>Created by {event.creator} for {event.group && (<Link to={`/groups/${event.group.id}`}>{event.group.name}</Link>)}</small>
       <p>{event.description}</p>
       <p>{event.time}</p>
       <p>Location: {event.location}</p>
       <p>{rsvpButton(event)}</p>
       <ul>
-        {event.attendees.map(attendee => (
+        {event.attendees?.map(attendee => (
           <li>{attendee.username}</li>
         ))}
       </ul>
