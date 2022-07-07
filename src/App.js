@@ -4,7 +4,7 @@ import UnauthenticatedApp from './UnauthenticatedApp'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({username: 'Dakota'})
+  const [currentUser, setCurrentUser] = useState(null)
   const [authChecked, setAuthChecked] = useState(false)
 
   useEffect(() => {
