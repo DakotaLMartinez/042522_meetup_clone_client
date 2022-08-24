@@ -6,6 +6,7 @@ function Signup({ setCurrentUser }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [error, setError] = useState('')
   
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -27,8 +28,8 @@ function Signup({ setCurrentUser }) {
             history.push('/groups')
           })
         } else {
-          res.json().then(errors => {
-            console.error(errors)
+          res.json().then(({ error }) => {
+            setError(error)
           })
         }
       })
@@ -82,6 +83,7 @@ function Signup({ setCurrentUser }) {
             className="w-full p-2 border"
           />
         </p>
+        <p className="text-red-400 h-8">{error}</p>
         <p><button className="w-full bg-green-500 py-2 mt-4" type="submit">Sign Up</button></p>
         <p className="text-center">-- or --</p>
         <p className="text-center"><Link className="py-4 px-6" to="/login">Log In</Link></p>
